@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit_task</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <form method="POST">
+        <div>
+            <label for="task">Task Title</label>
+            <input type="text" id="task" name="task" value="{{ task.task }}" required>
+        </div>
+        <div>
+            <label for="description">Task Description</label>
+            <textarea id="description" name="description">{{ task.description }}</textarea>
+        </div>
+        <div>
+            <label for="task-time">Task Time</label>
+            <input type="datetime-local" id="task-time" name="task-time" value="{{ task.task_time.strftime('%Y-%m-%dT%H:%M') }}">
+        </div>
+        <button type="submit">Update Task</button>
+    </form>
+    
+</body>
+</html>

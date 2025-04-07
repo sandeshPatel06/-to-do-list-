@@ -1,13 +1,16 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Index</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 </head>
+
 <body>
+    {% include 'navbar.html'%}
     <h1>Welcome to the To-Do App</h1>
-    <a href="{{ url_for('login') }}">Login</a> | <a href="{{ url_for('register') }}">Register</a>
+    <a  class="options" href="{{ url_for('login') }}">Login</a> <br><br><br><br> <a class="options" href="{{ url_for('register') }}">Register</a>
 </body>
+
 </html>
