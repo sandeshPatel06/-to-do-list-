@@ -6,9 +6,12 @@ import datetime
 app = Flask(__name__)
 
 # Secret key and database URI
-app.secret_key = 'your_secret_key'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'  # SQLite database file
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = os.getenv('FLASK_SECRET_KEY', 'your_secret_key')
+
+import os
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///app.db')
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 # Initialize SQLAlchemy
 db = SQLAlchemy(app)
