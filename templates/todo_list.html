@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,6 +30,7 @@
         }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -44,76 +46,37 @@
 
         <ul id="task-list">
             {% for task in tasks %}
-                {% if task and task|length == 2 %}
-                    <li class="task">
-                        <span class="task-name">{{ task[0] }}</span> 
-                        <span class="timer" id="timer-{{ loop.index }}">{{ task[1] }}</span>
-                        <button onclick="completeTask('{{ loop.index }}')">Complete</button>
-                        <button onclick="removeTask('{{ loop.index }}')">Remove</button>
-                    </li>
-                {% else %}
-                    <li class="task">Error: Task is not valid.</li>
-                {% endif %}
+            {% if task and task|length == 2 %}
+            <li class="task">
+                <span class="task-name">{{ task[0] }}</span>
+                <span class="timer" id="timer-{{ loop.index }}">{{ task[1] }}</span>
+                <button onclick="completeTask('{{ loop.index }}')">Complete</button>
+                <button onclick="removeTask('{{ loop.index }}')">Remove</button>
+            </li>
+            {% else %}
+            <li class="task">.</li>
+            {% endif %}
             {% endfor %}
         </ul>
 
-        <!-- Timer display -->
-        <div id="live-timer">
-            <p>Live Timer: <span id="live-time">00:00</span></p>
-        </div>
-    </div>
 
-    <script>
-        // Function to handle task completion
-        function completeTask(taskId) {
-            const taskElement = document.querySelector(`#timer-${taskId}`).parentElement;
-            taskElement.classList.toggle("completed");
-        }
+        <script>
+            // Function to handle task completion
+            function completeTask(taskId) {
+                const taskElement = document.querySelector(`#timer-${taskId}`).parentElement;
+                taskElement.classList.toggle("completed");
+            }
 
-        // Function to remove a task from the list
-        function removeTask(taskId) {
-            const taskElement = document.querySelector(`#timer-${taskId}`).parentElement;
-            taskElement.remove();
-        }
+            // Function to remove a task from the list
+            function removeTask(taskId) {
+                const taskElement = document.querySelector(`#timer-${taskId}`).parentElement;
+                taskElement.remove();
+            }
 
-        // Timer logic to count down each task's time
-        function startTimer(targetTime, elementId) {
-            const endTime = new Date(targetTime).getTime();
-            const timerElement = document.getElementById(elementId);
 
-            const interval = setInterval(function() {
-                const now = new Date().getTime();
-                const timeLeft = endTime - now;
 
-                if (timeLeft <= 0) {
-                    clearInterval(interval);
-                    timerElement.innerHTML = "Time's up!";
-                } else {
-                    const minutes = Math.floor(timeLeft / 60000);
-                    const seconds = Math.floor((timeLeft % 60000) / 1000);
-                    timerElement.innerHTML = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-                }
-            }, 1000);
-        }
 
-        // // Update the timer for each task when the page loads
-        // window.onload = function() {
-        //     {% for task in tasks %}
-        //         {% if task and task|length == 2 %}
-        //             const taskTime = "{{ task[1] }}";
-        //             startTimer(taskTime, "timer-{{ loop.index }}");
-        //         {% endif %}
-        //     {% endfor %}
-        // }
-
-        // Display a live timer for the page
-        let liveTime = 0;
-        setInterval(function() {
-            liveTime++;
-            const minutes = Math.floor(liveTime / 60);
-            const seconds = liveTime % 60;
-            document.getElementById("live-time").innerText = `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
-        }, 1000);
-    </script>
+        </script>
 </body>
+
 </html>
