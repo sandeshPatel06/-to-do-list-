@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_sqlalchemy import SQLAlchemy
-import datetime
+from datetime import datetime
 import os
 from flask_migrate import Migrate
 
@@ -108,9 +108,19 @@ def todo_list():
         task_time = request.form.get('task-time')
 
         if task_time:
-            task_time = datetime.datetime.strptime(task_time, "%Y-%m-%dT%H:%M")
+            # Convert the task time to a datetime object
+            task_time = datetime.strptime(task_time, "%Y-%m-%dT%H:%M")
+            
+            # Get the current datetime
+            current_time = datetime.now()
+
+            # Check if the task time is in the past
+            if task_time < current_time:
+                flash("You cannot set a task in the past.", "error")
+                return redirect(url_for('todo_list'))
+
         else:
-            task_time = datetime.datetime.now()
+            task_time = datetime.now()
 
         # Check if the task already exists for the user at the same time
         existing_task = Task.query.filter_by(task=task, task_time=task_time, user_id=user.id).first()
@@ -132,7 +142,9 @@ def todo_list():
         return redirect(url_for('todo_list'))
 
     tasks = Task.query.filter_by(user_id=user.id).all()
-    return render_template('todo_list.html', tasks=tasks, username=user.username)
+    current_time = datetime.now().strftime("%Y-%m-%dT%H:%M")  # Get current time for client-side validation
+    return render_template('todo_list.html', tasks=tasks, username=user.username, current_time=current_time)
+
 
 @app.route('/edit_task/<int:task_id>', methods=['GET', 'POST'])
 def edit_task(task_id):
@@ -143,7 +155,7 @@ def edit_task(task_id):
 
     # Fetch the task to be edited
     task = Task.query.filter_by(id=task_id, user_id=user.id).first()
-    
+
     if not task:
         flash("Task not found or you don't have permission to edit this task.", "error")
         return redirect(url_for('todo_list'))
@@ -154,13 +166,25 @@ def edit_task(task_id):
         task_time = request.form.get('task-time')
         
         if task_time:
-            task.task_time = datetime.datetime.strptime(task_time, "%Y-%m-%dT%H:%M")
-        
+            task_time = datetime.strptime(task_time, "%Y-%m-%dT%H:%M")
+            
+            # Get the current datetime
+            current_time = datetime.now()
+
+            # Check if the task time is in the past
+            if task_time < current_time:
+                flash("You cannot set a task in the past.", "error")
+                return redirect(url_for('edit_task', task_id=task.id))
+
+            task.task_time = task_time
+
         db.session.commit()
         flash("Task updated successfully!", "success")
         return redirect(url_for('todo_list'))
 
-    return render_template('edit_task.html', task=task)
+    # Set the current time for client-side validation
+    current_time = datetime.now().strftime("%Y-%m-%dT%H:%M")
+    return render_template('edit_task.html', task=task, current_time=current_time)
 
 
 @app.route('/delete_task/<int:task_id>', methods=['GET'])

@@ -19,7 +19,7 @@
         </div>
         <div>
             <label for="task-time">Task Time</label>
-            <input type="datetime-local" id="task-time" name="task-time" value="{{ task.task_time.strftime('%Y-%m-%dT%H:%M') }}">
+            <input type="datetime-local" id="task-time" min="{{ current_time }}" name="task-time" value="{{ task.task_time.strftime('%Y-%m-%dT%H:%M') }}">
         </div>
         <button type="submit">Update Task</button>
     </form>

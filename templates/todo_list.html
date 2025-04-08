@@ -4,18 +4,6 @@
 <head>
     <title>To-Do List</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style></style>
-    <script>
-        document.querySelector("form").addEventListener("submit", function (event) {
-            const submitButton = document.querySelector("input[type='submit']");
-            submitButton.disabled = true; // Disable the submit button
-
-            setTimeout(function () {
-                submitButton.disabled = false; // Re-enable after a short delay
-            }, 3000); // Delay for 3 seconds 
-        });
-    </script>
-
 </head>
 
 <body>
@@ -33,21 +21,20 @@
         </div>
         <div>
             <label for="task-time">Task Time</label>
-            <input type="datetime-local" id="task-time" name="task-time">
+            <input type="datetime-local" id="task-time" name="task-time" min="{{ current_time }}">
         </div>
+
         <button type="submit">Set Task</button>
     </form>
-
-
     <h2>{{username}} Your Tasks:</h2>
     <ul class="task-list">
         {% for task in tasks %}
         <li>
             <div>
-                <strong> <b>Task Title : </b>{{ task.task }}</strong> ({{ task.task_time.strftime('%Y-%m-%d %H:%M') }})
+                <strong> <b>Task Title : </b>{{ task.task }}</strong> <b>
+                    <p>Your deadline is :</p>
+                </b>({{ task.task_time.strftime('%Y-%m-%d %H:%M') }})
             </div>
-
-
             <p><b>Description :</b> {{ task.description }}</p>
             <div class="task-actions">
                 {% if task.completed %}
@@ -64,11 +51,7 @@
                 <a class="edit-button" onclick="edit()" href="{{ url_for('edit_task', task_id=task.id) }}">Edit</a>
             </div>
         </li>
-
         {% endfor %}
     </ul>
-
 </body>
-
-
 </html>

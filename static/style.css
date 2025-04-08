@@ -37,20 +37,26 @@ h2 {
 /* style of options on home screen */
 .options {
     color: black;
-    background-color: #b49717;
-    padding: 20px 40px; /* Padding for some space inside the element */
+    background-color: green;
+    padding: 20px 40px;
+    /* Padding for some space inside the element */
     border-radius: 8px;
     font-size: 1.2rem;
-    margin-left: 587px;
+    /* margin-left: 587px; */
     font-weight: bold;
-    text-align: center; /* Center the text inside the element */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: adds a subtle shadow */
-    transition: transform 0.3s ease; /* Optional: smooth scale on hover */
+    text-align: center;
+    /* Center the text inside the element */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Optional: adds a subtle shadow */
+    transition: transform 0.3s ease;
+    /* Optional: smooth scale on hover */
     text-decoration: none;
+
 }
 
 .options:hover {
-    transform: scale(1.05); /* Slightly enlarge when hovered */
+    transform: scale(1.05);
+    /* Slightly enlarge when hovered */
 }
 
 /* Form styling */
@@ -72,11 +78,28 @@ label {
     font-size: 16px;
     font-weight: 500;
     color: #555;
+    font-family: 'Arial', sans-serif;
+    /* Adds a clean and modern font */
+    letter-spacing: 0.5px;
+    /* Slight spacing between letters for readability */
+    line-height: 1.4;
+    /* Adjusts line height for better spacing */
+    text-transform: uppercase;
+    /* Makes the label text uppercase for a clean look */
+    transition: color 0.3s ease, transform 0.2s ease;
+    /* Adds smooth transitions for hover effect */
+}
+
+label:hover {
+    color: #007BFF;
+    /* Changes color to blue on hover for a subtle effect */
 }
 
 /* Input fields and button styling */
-input[type="text"], input[type="datetime-local"], textarea {
-    width: 100%;
+input[type="text"],
+input[type="datetime-local"],
+textarea {
+    width: auto;
     padding: 12px;
     margin: 8px 0 20px;
     border: 1px solid #ccc;
@@ -86,9 +109,22 @@ input[type="text"], input[type="datetime-local"], textarea {
     transition: border-color 0.3s;
 }
 
-input[type="text"]:focus, input[type="datetime-local"]:focus, textarea:focus {
+input[type="text"]:focus,
+input[type="datetime-local"]:focus,
+textarea:focus {
     border-color: #007bff;
     outline: none;
+}
+
+input[type="password"] {
+    width: auto;
+    padding: 12px;
+    margin: 8px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: #555;
+    transition: border-color 0.3s;
 }
 
 /* Button styling */
@@ -121,6 +157,10 @@ ul {
 .completed {
     background-color: forestgreen;
     color: white;
+    height: auto;
+    width: auto;
+    padding: 4px;
+    border-radius: 5px;
 }
 
 .incomplete {
@@ -134,7 +174,8 @@ ul {
 
 /* Buttons in tasks */
 
-.toggle-button:hover, .delete-button:hover {
+.toggle-button:hover,
+.delete-button:hover {
     background-color: #005f6b;
 }
 
@@ -209,7 +250,9 @@ nav {
         font-size: 1.5em;
     }
 
-    input[type="text"], input[type="datetime-local"], textarea {
+    input[type="text"],
+    input[type="datetime-local"],
+    textarea {
         padding: 10px;
     }
 
@@ -217,9 +260,11 @@ nav {
         width: 100%;
     }
 }
+
 /* Button styling */
 button {
-    background-color: #007BFF; /* Primary blue */
+    background-color: #007BFF;
+    /* Primary blue */
     color: white;
     border: none;
     padding: 12px 24px;
@@ -228,17 +273,23 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s ease-in-out;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Subtle shadow for depth */
 }
 
 button:hover {
-    background-color: #0056b3; /* Darker blue */
-    transform: scale(1.05); /* Slightly enlarge on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+    background-color: #0056b3;
+    /* Darker blue */
+    transform: scale(1.05);
+    /* Slightly enlarge on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    /* Larger shadow on hover */
 }
 
 /* Buttons in tasks */
-.toggle-button, .delete-button, .edit-button {
+.toggle-button,
+.delete-button,
+.edit-button {
     padding: 8px 16px;
     text-decoration: none;
     border-radius: 5px;
@@ -250,41 +301,53 @@ button:hover {
 
 /* Specific button color changes */
 .toggle-button {
-    background-color: #28a745; /* Green for toggle */
+    background-color: #28a745;
+    /* Green for toggle */
     color: white;
 }
 
 .delete-button {
-    background-color: #dc3545; /* Red for delete */
+    background-color: #dc3545;
+    /* Red for delete */
     color: white;
 }
 
 .edit-button {
-    background-color: #ffc107; /* Yellow for edit */
-    color: black; /* Black text for contrast */
+    background-color: #ffc107;
+    /* Yellow for edit */
+    color: black;
+    /* Black text for contrast */
 }
 
 /* Hover Effects */
 .toggle-button:hover {
-    background-color: #218838; /* Darker green */
+    background-color: #218838;
+    /* Darker green */
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .delete-button:hover {
-    background-color: #c82333; /* Darker red */
+    background-color: #c82333;
+    /* Darker red */
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .edit-button:hover {
-    background-color: #e0a800; /* Darker yellow */
+    background-color: #e0a800;
+    /* Darker yellow */
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Active state (optional, for more interaction) */
-button:active, .toggle-button:active, .delete-button:active, .edit-button:active {
-    transform: scale(0.98); /* Slight shrink effect */
-    box-shadow: none; /* Remove shadow when clicked */
+button:active,
+.toggle-button:active,
+.delete-button:active,
+.edit-button:active {
+    transform: scale(0.98);
+    /* Slight shrink effect */
+    box-shadow: none;
+    /* Remove shadow when clicked */
 }
